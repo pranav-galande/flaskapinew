@@ -17,15 +17,15 @@ def home():
 @app.route('/funfact', methods=['POST'])
 def funfactnumber():
     data = request.get_json()
-    
+
     number = data['number']
     #if number.isdigit():
     response = requests.get("http://numbersapi.com/" + str(number))
     return jsonify(response.text)
 
-    # if user input is not valid, it'll notify the user accordingly and then give them a fact about some random generated number
+    # if user input is not valid, it'll notify sthe user accordingly and then give them a fact about some random generated number
 
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0',port=10000)
