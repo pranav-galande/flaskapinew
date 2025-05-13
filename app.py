@@ -17,6 +17,7 @@ def home():
 @app.route('/funfact', methods=['POST'])
 def funfactnumber():
     data = request.get_json()
+    
     number = data['number']
     #if number.isdigit():
     response = requests.get("http://numbersapi.com/" + str(number))
