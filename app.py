@@ -33,7 +33,7 @@ def funfactnumber():
         response_text = response.text
     elif str(value) == "1":
         print("Option History")
-
+        response_text=TodaysHistory()
 
     elif str(value) == "2":
         print("Option Number")
@@ -57,10 +57,19 @@ def funfactnumber():
 
     #senddatatochatbot(response.text)
     url = "https://v1-api.swiftchat.ai/api/bots/0210276432749689/messages"
-    payload = "{\"to\": \"+919764772960\",\"type\": \"text\",  \"text\": {\"body\": \""+ str(response_text)+"\" }}"
+    payload = {
+    "to": "+919764772960",
+    "type": "text",
+    "text": {
+        "body": response_text
+            }
+            }
     api_key = "21bda582-e8d0-45bc-bb8b-a5c6c555d176"
-    headers = {"Authorization": f"Bearer {api_key}",'Content-type': 'application/json'}
-    responsenew = requests.request("POST", url, headers=headers, data=payload)
+    headers = {
+    "Authorization": f"Bearer {api_key}",
+    "Content-Type": "application/json"
+    }
+    responsenew = requests.post(url, headers=headers, json=payload)
     return jsonify(response_text + responsenew.text)
 
 @app.route('/createbuttons', methods=['GET'])
@@ -72,6 +81,58 @@ def createbuttons():
 
     responsenew = requests.request("POST", url, headers=headers, data=payload)
     return jsonify(responsenew.text)
+
+def TodaysHistory():
+    print("HistoryMethod Invoked")
+    today = datetime.now()
+    url = f"https://en.wikipedia.org/api/rest_v1/feed/onthisday/all/{today.month:02d}/{today.day:02d}"
+    print(url)
+    response = requests.get(url)
+
+    if response.status_code != 200:
+        print(f"Failed to fetch data: {response.status_code}")
+        return (f"Failed to fetch data: {response.status_code}")
+
+    data = response.json()
+
+    # Extract text and year from "selected"
+
+    result = []
+
+    result.append(f"------------- Births on this Day -------------")
+
+    selected_items = data.get("births", [])
+    
+
+    for item in selected_items:
+        year = item.get("year")
+        text = item.get("text")
+        if "India" in text or "Indian" in text:
+            result.append(f"({year}) {text}")
+
+    result.append(f"\\n------------- Deaths on this Day -------------")
+    selected_items = data.get("deaths", [])
+
+    for item in selected_items:
+        year = item.get("year")
+        text = item.get("text")
+        if "India" in text or "Indian" in text:
+            result.append(f"({year}) {text}")
+
+    result.append(f"\\n------------- Events on this Day -------------")
+    selected_items = data.get("events", [])
+
+    for item in selected_items:
+        year = item.get("year")
+        text = item.get("text")
+        if "India" in text or "Indian" in text:
+            result.append(f"({year}) {text}")
+
+    history_string = "\n".join(result)
+
+    print(history_string)
+
+    return history_string if result else "No selected historical events found for today."
 
 
 if __name__ == '__main__':
