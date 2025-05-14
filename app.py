@@ -11,17 +11,19 @@ def home():
 @app.route('/funfact', methods=['POST'])
 def funfactnumber():
     data = request.get_json()
-
+    value= 4
     #response_text = str(data)
     #Today's History
 
     #Surprise Me
 
     #date
-    if "button_index" not in data:
+
+    if "button_response" not in data:
         value = -1
     else:
-        value = data['button_index']
+        value1 = data['button_response']
+        value = value1["button_index"]
 
 
 
@@ -32,7 +34,7 @@ def funfactnumber():
     elif str(value) == "1":
         print("Option History")
 
-        
+
     elif str(value) == "2":
         print("Option Number")
         response_text = "Enter a number"
