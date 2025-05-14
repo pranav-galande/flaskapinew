@@ -3,17 +3,20 @@ import requests
 
 app = Flask(__name__)
 
-# In-memory storage for demonstration
-items = [
-    {"id": 1, "name": "Item One"},
-    {"id": 2, "name": "Item Two"}
-]
-
-@app.route('/')
+@app.route('/')  #registered in bot
 def home():
-    return jsonify({"message": "Welcome to the Flask API!"})
+    return jsonify({"message": "Welcome to the Number API!"})
 
+#knowabout number
 
+#know about date
+#suprise me
+
+#histor
+
+#send messgae to bot
+
+#sample
 @app.route('/funfact', methods=['POST'])
 def funfactnumber():
 
@@ -36,6 +39,8 @@ def funfactnumber():
 
     # print(response.text)
     return jsonify(response.text + responsenew.text)
+
+# do not change needed to run in render
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=10000)
