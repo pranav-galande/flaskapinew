@@ -2,6 +2,9 @@ from flask import Flask, jsonify, request
 import requests
 
 app = Flask(__name__)
+@app.route('/')
+def home():
+    return jsonify({"message": "Welcome to the Number API!"})
 
 @app.route('/NumberNuggets',methods=['POST'])  #registered in bot
 def NumberNuggets():
