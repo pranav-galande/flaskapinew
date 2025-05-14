@@ -29,10 +29,10 @@ def funfactnumber():
             response = requests.get("http://numbersapi.com/random/math")
             response_text = response.text
         elif (optionentered == "date"):
-            response = requests.get("http://numbersapi.com/random/year")
+            response = requests.get("http://numbersapi.com/random/date")
             response_text = response.text
         elif (optionentered == "year"):
-            response = requests.get("http://numbersapi.com/random/date")
+            response = requests.get("http://numbersapi.com/random/year")
             response_text = response.text
 
     elif str(value) == "2":
