@@ -16,11 +16,13 @@ def home():
 
 @app.route('/funfact', methods=['POST'])
 def funfactnumber():
+
+
     data = request.get_json()
 
-    number = data['number']
+    number = data['message_id']
     #if number.isdigit():
-    response = requests.get("http://numbersapi.com/" + str(number))
+    response = requests.get("http://numbersapi.com/" + str(10))
     #senddatatochatbot(response.text)
 
     url = "https://v1-api.swiftchat.ai/api/bots/0210276432749689/messages"
