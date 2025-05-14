@@ -3,8 +3,8 @@ import requests
 
 app = Flask(__name__)
 
-@app.route('/',methods=['POST'])  #registered in bot
-def home():
+@app.route('/NumberNuggets',methods=['POST'])  #registered in bot
+def NumberNuggets():
     #fetch the data
     data = request.get_json()
     #processign code
