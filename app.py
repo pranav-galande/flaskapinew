@@ -20,7 +20,21 @@ def funfactnumber():
     value = data['option']
     if str(value) == "1":
         print("Surprise Me")
-        
+        innerwrapper =  data["text"]
+        optionentered = innerwrapper["body"]
+        if(optionentered == "trivia"):
+            response = requests.get("http://numbersapi.com/random/trivia")
+            response_text = response.text
+        elif(optionentered == "math"):
+            response = requests.get("http://numbersapi.com/random/math")
+            response_text = response.text
+        elif (optionentered == "date"):
+            response = requests.get("http://numbersapi.com/random/year")
+            response_text = response.text
+        elif (optionentered == "year"):
+            response = requests.get("http://numbersapi.com/random/date")
+            response_text = response.text
+
     elif str(value) == "2":
         print("Option Number")
         print("Option Date")
